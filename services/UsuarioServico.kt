@@ -1,6 +1,12 @@
 package services
 
+import entities.Conteúdo
+import entities.Formação
 import entities.Usuario
+import enumerations.NivelConteudo
+import enumerations.StatusConteudo
+import enumerations.StatusFormacao
+import enumerations.TipoFormacao
 import utils.Utilidade
 
 class UsuarioServico {
@@ -22,7 +28,8 @@ class UsuarioServico {
                 val usuarioInscrito = FormacaoServico.inscritos.values.find {it.login == login && it.senha == senha}
 
                 if(usuarioInscrito != null){
-                    interageUsuario(usuarioInscrito)
+                    val formacao = Formação("", StatusFormacao.NÃO_INICIADA, TipoFormacao.OUTRA, Conteúdo(1, "", 1, NivelConteudo.FÁCIL, StatusConteudo.PENDENTE))
+                    interageUsuario(usuarioInscrito, formacao)
                 }
                 else{
                     Utilidade.imprimeMensagem("Login ou senha não reconhecidos.\n")
@@ -32,8 +39,32 @@ class UsuarioServico {
                 Utilidade.imprimeMensagem("Usuário não encontrado.\n")
             }
         }
-        fun interageUsuario(usuario: Usuario){
-            Utilidade.imprimeMensagem("\n")
+        fun interageUsuario(usuario: Usuario, formacao : Formação){
+            Utilidade.imprimeMensagem("Bem-vindo(a) caríssimo(a) ${usuario.nome}\n")
+            println("O que temos para hoje:\n" +
+                    "1 - Continuar conteúdo:\n" +
+                    "2 - Listar conteúdos já finalizados.\n" +
+                    "3 - Começar outro curso.\n" +
+                    "4 - Sair da conta:\n")
+            var opcao = Utilidade.sc.nextInt()
+
+            when(opcao){
+                1 -> {
+                    ConteudoServico.direcionaCurso(formacao)
+                }
+                2 -> {
+
+                }
+                3 -> {
+
+                }
+                4 -> {
+
+                }
+                else -> {
+                    Utilidade.imprimeMensagem("Opção não reconhecida.\n")
+                }
+            }
         }
     }
 }

@@ -2,6 +2,7 @@ package services
 
 import entities.Usuario
 import enumerations.NivelUsuario
+import interagePrimeiro
 import utils.Utilidade
 import java.util.*
 import kotlin.random.Random
@@ -55,15 +56,19 @@ class FormacaoServico {
         fun escolherFormação(usuario: Usuario){
             Utilidade.imprimeMensagem("Escolha apenas uma de nossas formações:")
             println("           > 1 - Desenvolvimento backend com Kotlin e Spring Boot\n" +
-                    "           > 2 - Desenvolvimento frontend com JavaScript e Angular\n")
+                    "           > 2 - Desenvolvimento frontend com JavaScript e Angular\n" +
+                    "           > 3 - Sair da conta:\n")
             var opcao = Utilidade.sc.nextInt()
 
             when(opcao){
                 1 -> {
-                    ConteudoServico.defineKotlin()
+                    ConteudoServico.defineKotlin(usuario)
                 }
                 2 -> {
-                    ConteudoServico.defineJS()
+                    ConteudoServico.defineJS(usuario)
+                }
+                3 -> {
+                    interagePrimeiro()
                 }
                 else -> {
                     Utilidade.imprimeMensagem("Opção não possível.\n")
