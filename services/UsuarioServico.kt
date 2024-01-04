@@ -7,6 +7,7 @@ import enumerations.NivelConteudo
 import enumerations.StatusConteudo
 import enumerations.StatusFormacao
 import enumerations.TipoFormacao
+import interagePrimeiro
 import utils.Utilidade
 
 class UsuarioServico {
@@ -33,38 +34,50 @@ class UsuarioServico {
                 }
                 else{
                     Utilidade.imprimeMensagem("Login ou senha não reconhecidos.\n")
+                    interagePrimeiro()
                 }
             }
             else{
                 Utilidade.imprimeMensagem("Usuário não encontrado.\n")
+                interagePrimeiro()
             }
+
         }
         fun interageUsuario(usuario: Usuario, formacao : Formação){
-            Utilidade.imprimeMensagem("Bem-vindo(a) caríssimo(a) ${usuario.nome}\n")
-            println("O que temos para hoje:\n" +
-                    "1 - Continuar conteúdo:\n" +
-                    "2 - Listar conteúdos já finalizados.\n" +
-                    "3 - Começar outro curso.\n" +
-                    "4 - Sair da conta:\n")
-            var opcao = Utilidade.sc.nextInt()
+            do {
+                Utilidade.imprimeMensagem("Bem-vindo(a) caríssimo(a) ${usuario.nome}\n")
+                println(
+                    "O que temos para hoje:\n" +
+                            "1 - Continuar conteúdo:\n" +
+                            "2 - Listar conteúdos já finalizados.\n" +
+                            "3 - Começar outro curso.\n" +
+                            "4 - Sair da conta:\n"
+                )
+                var opcao = Utilidade.sc.nextInt()
 
-            when(opcao){
-                1 -> {
-                    ConteudoServico.direcionaCurso(formacao)
-                }
-                2 -> {
+                when (opcao) {
+                    1 -> {
+                        ConteudoServico.direcionaCurso(usuario, formacao)
+                    }
 
-                }
-                3 -> {
+                    2 -> {
+                        ConteudoServico.listaConteudosFim()
+                    }
 
-                }
-                4 -> {
+                    3 -> {
 
+                    }
+
+                    4 -> {
+                        interagePrimeiro()
+                        break
+                    }
+
+                    else -> {
+                        Utilidade.imprimeMensagem("Opção não reconhecida.\n")
+                    }
                 }
-                else -> {
-                    Utilidade.imprimeMensagem("Opção não reconhecida.\n")
-                }
-            }
+            } while(true)
         }
     }
 }

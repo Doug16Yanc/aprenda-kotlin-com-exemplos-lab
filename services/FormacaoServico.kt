@@ -1,7 +1,9 @@
 package services
 
+import entities.Formação
 import entities.Usuario
 import enumerations.NivelUsuario
+import enumerations.TipoFormacao
 import interagePrimeiro
 import utils.Utilidade
 import java.util.*
@@ -19,7 +21,7 @@ class FormacaoServico {
             }
             return entrada
         }
-        fun realizaMatricula(){
+        fun realizaMatricula(formacao: Formação){
             Utilidade.imprimeMensagem("Realização de matrícula:\n" +
                     "Preencha com os dados solicitados.\n\n")
             val id = gerarId()
@@ -37,9 +39,9 @@ class FormacaoServico {
 
             inscritos[id] = usuario
 
-            comprovaMatricula(usuario)
+            comprovaMatricula(usuario, formacao)
         }
-        fun comprovaMatricula(usuario: Usuario){
+        fun comprovaMatricula(usuario: Usuario, formacao : Formação){
             Utilidade.imprimeMensagem("Comprovante de matrícula com a DIO\n\n" +
                     "                  DADOS DO INSCRITO                \n\n" +
                     "                 > Nome do inscrito : ${usuario.nome}\n" +
@@ -51,9 +53,9 @@ class FormacaoServico {
                     "                 > Código da operação : ${UUID.randomUUID()}\n\n")
 
             println("Para tanto, escolha uma de nossas formações e bom aproveitamento:\n\n")
-            escolherFormação(usuario)
+            escolherFormação(usuario, formacao)
         }
-        fun escolherFormação(usuario: Usuario){
+        fun escolherFormação(usuario: Usuario, formacao: Formação){
             Utilidade.imprimeMensagem("Escolha apenas uma de nossas formações:")
             println("           > 1 - Desenvolvimento backend com Kotlin e Spring Boot\n" +
                     "           > 2 - Desenvolvimento frontend com JavaScript e Angular\n" +
@@ -62,10 +64,13 @@ class FormacaoServico {
 
             when(opcao){
                 1 -> {
-                    ConteudoServico.defineKotlin(usuario)
+                    formacao.tipo = TipoFormacao.BACKEND
+                    ConteudoServico.defineKotlin(usuario, formacao)
                 }
                 2 -> {
-                    ConteudoServico.defineJS(usuario)
+                    formacao.tipo = TipoFormacao.FRONTEND
+                    ConteudoServico.defineJS(usuario, formacao)
+
                 }
                 3 -> {
                     interagePrimeiro()

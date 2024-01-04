@@ -1,7 +1,13 @@
+import entities.Conteúdo
+import entities.Formação
 import services.FormacaoServico
 import services.UsuarioServico
 import utils.Utilidade
 import entities.Usuario
+import enumerations.NivelConteudo
+import enumerations.StatusConteudo
+import enumerations.StatusFormacao
+import enumerations.TipoFormacao
 import java.util.*
 
 fun main() {
@@ -22,9 +28,9 @@ fun interagePrimeiro(){
 
             UsuarioServico.realizaLogin()
         }
-
         "n" -> {
-            FormacaoServico.realizaMatricula()
+            val formacao = Formação("", StatusFormacao.NÃO_INICIADA, TipoFormacao.OUTRA, Conteúdo(1, "", 1, NivelConteudo.FÁCIL, StatusConteudo.PENDENTE))
+            FormacaoServico.realizaMatricula(formacao)
         }
 
         "o" -> {
