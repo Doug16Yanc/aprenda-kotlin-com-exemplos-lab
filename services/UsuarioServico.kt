@@ -48,27 +48,37 @@ class UsuarioServico {
                 Utilidade.imprimeMensagem("Bem-vindo(a) caríssimo(a) ${usuario.nome}\n")
                 println(
                     "O que temos para hoje:\n" +
-                            "1 - Continuar conteúdo:\n" +
-                            "2 - Listar conteúdos já finalizados.\n" +
-                            "3 - Começar outro curso.\n" +
-                            "4 - Sair da conta:\n"
+                            "1 - Visualizar dados\n" +
+                            "2 - Continuar conteúdo:\n" +
+                            "3 - Listar conteúdos já finalizados.\n" +
+                            "4 - Iniciar outra formação.\n" +
+                            "5 - Sair da conta:\n"
                 )
                 var opcao = Utilidade.sc.nextInt()
 
                 when (opcao) {
                     1 -> {
+                        consultaDados(usuario, formacao)
+                    }
+                    2 -> {
                         ConteudoServico.direcionaCurso(usuario, formacao)
                     }
 
-                    2 -> {
+                    3 -> {
                         ConteudoServico.listaConteudosFim()
                     }
 
-                    3 -> {
+                    4 -> {
+                        if (ConteudoServico.validaConclusaoTotal(formacao)) {
 
+                            FormacaoServico.realizaNovaFormacao(usuario, formacao)
+
+                        } else {
+                            Utilidade.imprimeMensagem("Você ainda não concluiu a formação atual.\n")
+                        }
                     }
 
-                    4 -> {
+                    5 -> {
                         interagePrimeiro()
                         break
                     }
@@ -78,6 +88,13 @@ class UsuarioServico {
                     }
                 }
             } while(true)
+        }
+        fun consultaDados(usuario : Usuario, formacao: Formação){
+            Utilidade.imprimeMensagem("Visualização de dados do usuário\n\n" +
+                    "                           > Nome : ${usuario.nome}\n" +
+                    "                           > Id : ${usuario.id}\n" +
+                    "                           > Email : ${usuario.email}\n" +
+                    "                           > Nível usuario : ${usuario.nivel}\n\n")
         }
     }
 }

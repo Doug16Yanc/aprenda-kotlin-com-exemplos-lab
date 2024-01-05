@@ -34,7 +34,7 @@ class FormacaoServico {
             println("Senha para o seu login:")
             var senha = Utilidade.sc.nextLine()
 
-            val usuario = Usuario(id, nome, email, login, senha, NivelUsuario.SILVER)
+            val usuario = Usuario(id, nome, email, login, senha, NivelUsuario.BRONZE)
 
             inscritos[id] = usuario
 
@@ -77,11 +77,18 @@ class FormacaoServico {
                 }
             }
         }
-        fun realizaFormacao(formacao : Formação){
-            if (ConteudoServico.validaConclusaoTotal(formacao)){
-                Utilidade.imprimeMensagem("")
-
-            }
+        fun realizaNovaFormacao(usuario: Usuario, formacao : Formação){
+           when (formacao.tipo){
+               TipoFormacao.BACKEND -> {
+                   ConteudoServico.defineJS(usuario, formacao)
+               }
+               TipoFormacao.FRONTEND -> {
+                   ConteudoServico.defineKotlin(usuario, formacao)
+               }
+               TipoFormacao.OUTRA -> {
+                   return
+               }
+           }
         }
     }
 }

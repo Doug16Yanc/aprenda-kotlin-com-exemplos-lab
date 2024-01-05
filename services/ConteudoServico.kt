@@ -150,6 +150,7 @@ class ConteudoServico {
                                     "${idEncontrado.conteudo.nome} finalizado com sucesso.\n"
                         )
                         idEncontrado.conteudo.status = StatusConteudo.CONCLUÍDO
+                        aumentaNivel(usuario, idEncontrado.conteudo)
                         conteudosFinalizados.add(idEncontrado.conteudo)
                     } else {
                         println("Você já concluiu esse conteúdo.")
@@ -220,6 +221,7 @@ class ConteudoServico {
                                     "${idEncontrado.conteudo.nome} finalizado com sucesso.\n"
                         )
                         idEncontrado.conteudo.status = StatusConteudo.CONCLUÍDO
+                        aumentaNivel(usuario, idEncontrado.conteudo)
                         conteudosFinalizados.add(idEncontrado.conteudo)
                     } else {
                         println("Você já concluiu esse conteúdo.")
@@ -266,24 +268,17 @@ class ConteudoServico {
                 else -> false
             }
         }
-        fun aumentaNivel(usuario : Usuario, conteudo : Conteúdo){
-            when(conteudo.nivel){
-                NivelConteudo.FÁCIL -> {
-                    if(conteudo.status == StatusConteudo.CONCLUÍDO){
-                        usuario.nivel = NivelUsuario.GOLD
-                    }
-                }
-                NivelConteudo.INTERMEDIÁRIO -> {
-                    if(conteudo.status == StatusConteudo.CONCLUÍDO){
-                        usuario.nivel = NivelUsuario.GOLD
-                    }
-                }
-                NivelConteudo.AVANÇADO -> {
-                    if (conteudo.status == StatusConteudo.CONCLUÍDO) {
-                       usuario.nivel = NivelUsuario.PLATINUM
-                    }
+
+        fun aumentaNivel(usuario: Usuario, conteudo: Conteúdo) {
+            if (conteudo.status == StatusConteudo.CONCLUÍDO) {
+                usuario.nivel = when (usuario.nivel) {
+                    NivelUsuario.BRONZE -> NivelUsuario.SILVER
+                    NivelUsuario.SILVER -> NivelUsuario.GOLD
+                    NivelUsuario.GOLD -> NivelUsuario.PLATINUM
+                    else -> usuario.nivel
                 }
             }
         }
+
     }
 }
