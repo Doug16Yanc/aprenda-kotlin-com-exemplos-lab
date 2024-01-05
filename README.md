@@ -1,10 +1,55 @@
-# Aprenda Kotlin Com Exemplos: Desafio de Projeto (Lab)
+# Formações Kotlin 📚🖥️
 
-Desafio de Projeto criado para avaliação do conteúdo técnico explorado no repositório [aprenda-kotlin-com-exemplos](https://github.com/digitalinnovationone/aprenda-kotlin-com-exemplos). **Nesse contexto, iremos abstrair o seguinte domínio de aplicação:**
+Repositório público contendo a implementação de um projeto Kotlin que utiliza conceitos de programação estrutural, funcional e orientada a objetos a fim de abstrair o domínio de aplicação da [Digital Innovatione One](https://github.com/digitalinnovationone).
 
-**A [DIO](https://web.dio.me) possui `Formacoes` incríveis que têm como objetivo oferecer um conjunto de `ConteudosEducacionais` voltados para uma stack tecnológica específica, preparando profissionais de TI para o mercado de trabalho. `Formacoes` possuem algumas características importantes, como `nome`, `nivel` e seus respectivos `conteudosEducacionais`. Além disso, tais experiências educacionais têm um comportamento relevante ao nosso domínio, definido pela capacidade de `matricular` um ou mais `Alunos`.**
+# Documentação 📃📄
 
 
-```kotlin
-TODO("Crie uma solução em Koltin abstraindo esse domínio. O arquivo [desafio.kt] te ajudará 😉")
-```
+O sistema consiste em uma aplicação que fornece uma interface de interação com o usuário por meio do Console do editor de código que questiona-o acerca de sua inscrição na plataforma. Em caso de resposta negativa, o usuário é solicitado a preencher seus dados, por meio de uma função que gera códigos identificadores presentes em um intervalo limitado dos números inteiros, por meio disso, os dados do usuário, agora inscrito na plataforma, é inserido em uma estrutura de dados HashMap que utiliza o conceito de par chave-valor.
+
+O inscrito tem disponíveis as formações gratuitas "Desenvolvimento backend com Kotlin e Spring Boot" do tipo BACKEND e "Desenvolvimento frontend com JavaScript e Angular Framework" do tipo FRONTEND, ambos com duração de 12 horas, o inscrito só pode fazer um por vez, por meio da inserção do código do conteúdo há um avanço consecutivo do nível do usuário (de BRONZE para SILVER, SILVER para GOLD, GOLD para PLATINUM, o último nível) que inicia com nível BRONZE, esse avanço é importante para definir os descontos consecutivos em uma nova formação não gratuita ou premium, 5% a menos do valor do preço original (R$ 59,90) a cada formação, por exemplo, se o inscrito chegar ao nível GOLD (completou dois conteúdos de uma formação) ele tem direito a um desconto de 10% (5% + 5% das finalizações de dois conteúdos) em uma nova formação que não está disponível de forma gratuita.  
+
+O sistema utiliza de conceitos importantes de paradigmas de programação e estruturas de dados como abstração, interfaces, associação de classes, listas e hashes.
+
+# Ferramentas 👨🏽‍💻
+
+[Git](https://git-scm.com/)
+
+[GitHub](https://github.com)
+
+[IntelliJ IDEA](https://www.jetbrains.com/idea/promo/)
+
+# Recomendações 💡
+
+Seja um bom amigo da documentação oficial da linguagem de programação a qual você está trabalhando no momento, neste caso, a do Kotlin é :
+[kotlinlang.org](https://kotlinlang.org/)
+
+# Como instalar 👨🏽‍🔧
+
+Por meio de terminal Git ou Linux com o código :
+https://github.com/Doug16Yanc/aprenda-kotlin-com-exemplos-lab.git ou fazendo o download direto do projeto zipado.
+
+# Tecnologias utilizadas 🖥️💻
+
+[Kotlin](https://kotlinlang.org/)
+
+[Java](https://docs.oracle.com/en/java/)
+
+# Aprendizados 🤓👨🏽‍🎓📚
+
+Metodologias de desenvolvimento ágil.
+
+Habilidades com git e github.
+
+Novas competências em conceitos de 
+paradigmas de programação.
+
+# Autor(es) desta implementação neste fork
+
+[Douglas Holanda](https://github.com/Doug16Yanc)
+
+# Licença
+
+[MIT](https://choosealicense.com/licenses/mit/)
+
+
