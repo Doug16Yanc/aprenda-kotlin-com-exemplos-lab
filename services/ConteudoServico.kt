@@ -3,10 +3,7 @@ package services
 import entities.Conteúdo
 import entities.Formação
 import entities.Usuario
-import enumerations.NivelConteudo
-import enumerations.StatusConteudo
-import enumerations.StatusFormacao
-import enumerations.TipoFormacao
+import enumerations.*
 import interagePrimeiro
 import utils.Utilidade
 
@@ -267,6 +264,25 @@ class ConteudoServico {
                 TipoFormacao.BACKEND -> conteudosKt.all { it.conteudo.status == StatusConteudo.CONCLUÍDO }
                 TipoFormacao.FRONTEND -> conteudosJS.all { it.conteudo.status == StatusConteudo.CONCLUÍDO }
                 else -> false
+            }
+        }
+        fun aumentaNivel(usuario : Usuario, conteudo : Conteúdo){
+            when(conteudo.nivel){
+                NivelConteudo.FÁCIL -> {
+                    if(conteudo.status == StatusConteudo.CONCLUÍDO){
+                        usuario.nivel = NivelUsuario.GOLD
+                    }
+                }
+                NivelConteudo.INTERMEDIÁRIO -> {
+                    if(conteudo.status == StatusConteudo.CONCLUÍDO){
+                        usuario.nivel = NivelUsuario.GOLD
+                    }
+                }
+                NivelConteudo.AVANÇADO -> {
+                    if (conteudo.status == StatusConteudo.CONCLUÍDO) {
+                       usuario.nivel = NivelUsuario.PLATINUM
+                    }
+                }
             }
         }
     }
