@@ -25,7 +25,6 @@ class FormacaoServico {
             Utilidade.imprimeMensagem("Realização de matrícula:\n" +
                     "Preencha com os dados solicitados.\n\n")
             val id = gerarId()
-            Utilidade.sc.nextLine()
             println("Nome:")
             var nome = Utilidade.sc.nextLine()
             println("Seu email para contato:")
@@ -64,11 +63,9 @@ class FormacaoServico {
 
             when(opcao){
                 1 -> {
-                    formacao.tipo = TipoFormacao.BACKEND
                     ConteudoServico.defineKotlin(usuario, formacao)
                 }
                 2 -> {
-                    formacao.tipo = TipoFormacao.FRONTEND
                     ConteudoServico.defineJS(usuario, formacao)
 
                 }
@@ -78,6 +75,12 @@ class FormacaoServico {
                 else -> {
                     Utilidade.imprimeMensagem("Opção não possível.\n")
                 }
+            }
+        }
+        fun realizaFormacao(formacao : Formação){
+            if (ConteudoServico.validaConclusaoTotal(formacao)){
+                Utilidade.imprimeMensagem("")
+
             }
         }
     }
