@@ -29,7 +29,7 @@ class UsuarioServico {
                 val usuarioInscrito = FormacaoServico.inscritos.values.find {it.login == login && it.senha == senha}
 
                 if(usuarioInscrito != null){
-                    val formacao = Formação("", StatusFormacao.NÃO_INICIADA, TipoFormacao.OUTRA, Conteúdo(1, "", 1, NivelConteudo.FÁCIL, StatusConteudo.PENDENTE))
+                    val formacao = Formação("", 1, StatusFormacao.NÃO_INICIADA, TipoFormacao.OUTRA, Conteúdo(1, "", 1, NivelConteudo.FÁCIL, StatusConteudo.PENDENTE))
                     interageUsuario(usuarioInscrito, formacao)
                 }
                 else{
@@ -41,7 +41,6 @@ class UsuarioServico {
                 Utilidade.imprimeMensagem("Usuário não encontrado.\n")
                 interagePrimeiro()
             }
-
         }
         fun interageUsuario(usuario: Usuario, formacao : Formação){
             do {
@@ -52,7 +51,8 @@ class UsuarioServico {
                             "2 - Continuar conteúdo:\n" +
                             "3 - Listar conteúdos já finalizados.\n" +
                             "4 - Iniciar outra formação.\n" +
-                            "5 - Sair da conta:\n"
+                            "5 - Ver custo de uma nova formação não gratuita.\n" +
+                            "6 - Sair da conta:\n"
                 )
                 var opcao = Utilidade.sc.nextInt()
 
@@ -77,10 +77,12 @@ class UsuarioServico {
                             Utilidade.imprimeMensagem("Você ainda não concluiu a formação atual.\n")
                         }
                     }
-
                     5 -> {
+                        CustoServico.mostraCustos(usuario, formacao)
+                    }
+
+                    6 -> {
                         interagePrimeiro()
-                        break
                     }
 
                     else -> {

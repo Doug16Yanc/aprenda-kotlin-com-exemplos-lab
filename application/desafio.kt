@@ -29,7 +29,7 @@ fun interagePrimeiro(){
             UsuarioServico.realizaLogin()
         }
         "n" -> {
-            val formacao = Formação("", StatusFormacao.NÃO_INICIADA, TipoFormacao.OUTRA, Conteúdo(1, "", 1, NivelConteudo.FÁCIL, StatusConteudo.PENDENTE))
+            val formacao = Formação("", 12, StatusFormacao.NÃO_INICIADA, TipoFormacao.OUTRA, Conteúdo(1, "", 1, NivelConteudo.FÁCIL, StatusConteudo.PENDENTE))
             FormacaoServico.realizaMatricula(formacao)
         }
 

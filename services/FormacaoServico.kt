@@ -90,5 +90,9 @@ class FormacaoServico {
                }
            }
         }
+        fun comprovaFormacao(usuario: Usuario, formacao : Formação){
+            Utilidade.imprimeMensagem("Certificamos que ${usuario.nome} concluiu\n" +
+                    "com sucesso a sua jornada em ${formacao.nome} com duração de ${formacao.duracao} horas.\n")
+        }
     }
 }

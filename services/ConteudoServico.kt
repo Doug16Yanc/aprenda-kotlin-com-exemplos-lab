@@ -17,6 +17,7 @@ class ConteudoServico {
             conteudosKt.add(
                 Formação(
                     "Desenvolvimento Kotlin",
+                    12,
                     StatusFormacao.NÃO_INICIADA,
                     TipoFormacao.BACKEND,
                     Conteúdo(
@@ -31,6 +32,7 @@ class ConteudoServico {
             conteudosKt.add(
                 Formação(
                     "Desenvolvimento Kotlin",
+                    12,
                     StatusFormacao.NÃO_INICIADA,
                     TipoFormacao.BACKEND,
                     Conteúdo(
@@ -45,6 +47,7 @@ class ConteudoServico {
             conteudosKt.add(
                 Formação(
                     "Desenvolvimento Kotlin",
+                    12,
                     StatusFormacao.NÃO_INICIADA,
                     TipoFormacao.BACKEND,
                     Conteúdo(
@@ -60,6 +63,7 @@ class ConteudoServico {
             conteudosJS.add(
                 Formação(
                     "Desenvolvimento frontend com JS e Angular",
+                    12,
                     StatusFormacao.NÃO_INICIADA,
                     TipoFormacao.FRONTEND,
                     Conteúdo(23564, "Frontend com JavaScript", 3, NivelConteudo.FÁCIL, StatusConteudo.PENDENTE)
@@ -68,12 +72,13 @@ class ConteudoServico {
             conteudosJS.add(
                 Formação(
                     "Desenvolvimento frontend com JS e Angular",
+                    12,
                     StatusFormacao.NÃO_INICIADA,
                     TipoFormacao.FRONTEND,
                     Conteúdo(
                         24521,
                         "Fundamentos do Angular Framework",
-                        3,
+                        4,
                         NivelConteudo.INTERMEDIÁRIO,
                         StatusConteudo.PENDENTE
                     )
@@ -82,12 +87,13 @@ class ConteudoServico {
             conteudosJS.add(
                 Formação(
                     "Desenvolvimento frontend com JS e Angular",
+                    12,
                     StatusFormacao.NÃO_INICIADA,
                     TipoFormacao.FRONTEND,
                     Conteúdo(
                         25789,
                         "Construindo uma aplicação com Angular",
-                        4,
+                        5,
                         NivelConteudo.AVANÇADO,
                         StatusConteudo.PENDENTE
                     )
@@ -104,6 +110,7 @@ class ConteudoServico {
         }
 
         fun defineKotlin(usuario: Usuario, formacao: Formação) {
+            formacao.status = StatusFormacao.ANDAMENTO
             formacao.tipo = TipoFormacao.BACKEND
             Utilidade.imprimeMensagem("Definição de andamento da formação:")
             println("O que você tem a aprender:\n")
@@ -165,6 +172,8 @@ class ConteudoServico {
                         "Você concluiu toda a formação de Desenvolvimento backend com\n" +
                                 "Kotlin e Spring Boot.\n"
                     )
+                    formacao.status = StatusFormacao.CONCLUÍDA
+                    FormacaoServico.comprovaFormacao(usuario, formacao)
                     break
                 }
 
@@ -174,6 +183,7 @@ class ConteudoServico {
         }
 
         fun defineJS(usuario: Usuario, formacao: Formação) {
+            formacao.status = StatusFormacao.ANDAMENTO
             formacao.tipo = TipoFormacao.FRONTEND
             Utilidade.imprimeMensagem("Definição de andamento da formação:")
             println("O que você tem a aprender:\n")
@@ -236,6 +246,8 @@ class ConteudoServico {
                         "Você concluiu toda a formação de Desenvolvimento frontend com\n" +
                                 "JavaScript e Angular Framework.\n"
                     )
+                    formacao.status = StatusFormacao.CONCLUÍDA
+                    FormacaoServico.comprovaFormacao(usuario, formacao)
                     break
                 }
 
