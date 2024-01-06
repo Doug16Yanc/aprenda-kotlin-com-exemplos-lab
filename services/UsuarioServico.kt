@@ -12,15 +12,16 @@ import utils.Utilidade
 
 class UsuarioServico {
     companion object{
-        fun realizaLogin(){
+        fun realizaLogin(formacao : Formação){
             Utilidade.imprimeMensagem("LOGIN DE INSCRITO\n\n")
             println("Digite seu id (sua chave primária que comprova seu registo na plataforma):\n")
             var id = Utilidade.sc.nextInt()
-            Utilidade.sc.nextLine()
+
             val usuarioEncontrado = FormacaoServico.inscritos.values.find {it.id == id}
 
             if (usuarioEncontrado != null){
                 println("Validação por meio de usuário e senha:\n")
+                Utilidade.sc.nextLine()
                 println("Login:")
                 var login = Utilidade.sc.nextLine()
                 println("Senha de acesso:")
@@ -29,7 +30,6 @@ class UsuarioServico {
                 val usuarioInscrito = FormacaoServico.inscritos.values.find {it.login == login && it.senha == senha}
 
                 if(usuarioInscrito != null){
-                    val formacao = Formação("", 1, StatusFormacao.NÃO_INICIADA, TipoFormacao.OUTRA, Conteúdo(1, "", 1, NivelConteudo.FÁCIL, StatusConteudo.PENDENTE))
                     interageUsuario(usuarioInscrito, formacao)
                 }
                 else{
@@ -48,7 +48,7 @@ class UsuarioServico {
                 println(
                     "O que temos para hoje:\n" +
                             "1 - Visualizar dados\n" +
-                            "2 - Continuar conteúdo:\n" +
+                            "2 - Ir para conteúdo:\n" +
                             "3 - Listar conteúdos já finalizados.\n" +
                             "4 - Iniciar outra formação.\n" +
                             "5 - Ver custo de uma nova formação não gratuita.\n" +
@@ -61,9 +61,13 @@ class UsuarioServico {
                         consultaDados(usuario, formacao)
                     }
                     2 -> {
-                        ConteudoServico.direcionaCurso(usuario, formacao)
+                        if(formacao.status == StatusFormacao.NÃO_INICIADA){
+                            FormacaoServico.escolherFormação(usuario, formacao)
+                        }
+                        else if (formacao.status == StatusFormacao.ANDAMENTO || formacao.status == StatusFormacao.CONCLUÍDA){
+                            ConteudoServico.direcionaCurso(usuario, formacao)
+                        }
                     }
-
                     3 -> {
                         ConteudoServico.listaConteudosFim()
                     }
@@ -74,7 +78,7 @@ class UsuarioServico {
                             FormacaoServico.realizaNovaFormacao(usuario, formacao)
 
                         } else {
-                            Utilidade.imprimeMensagem("Você ainda não concluiu a formação atual.\n")
+                            Utilidade.imprimeMensagem("Opção não disponível no momento.\n")
                         }
                     }
                     5 -> {

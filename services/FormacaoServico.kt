@@ -3,6 +3,7 @@ package services
 import entities.Formação
 import entities.Usuario
 import enumerations.NivelUsuario
+import enumerations.StatusFormacao
 import enumerations.TipoFormacao
 import interagePrimeiro
 import utils.Utilidade
@@ -14,10 +15,10 @@ class FormacaoServico {
         val inscritos : MutableMap<Int, Usuario> = HashMap()
         fun gerarId(): Int {
             var num = 0
-            var entrada = Random.nextInt(100000, 1000000)
+            var entrada = Random.nextInt(1000, 10000)
 
             while (inscritos.containsKey(entrada)) {
-                entrada = Random.nextInt(100000, 1000000)
+                entrada = Random.nextInt(1000, 10000)
             }
             return entrada
         }
@@ -52,7 +53,7 @@ class FormacaoServico {
                     "                 > Código da operação : ${UUID.randomUUID()}\n\n")
 
             println("Para tanto, escolha uma de nossas formações e bom aproveitamento:\n\n")
-            escolherFormação(usuario, formacao)
+            UsuarioServico.interageUsuario(usuario, formacao)
         }
         fun escolherFormação(usuario: Usuario, formacao: Formação){
             Utilidade.imprimeMensagem("Escolha apenas uma de nossas formações:")
@@ -63,13 +64,18 @@ class FormacaoServico {
 
             when(opcao){
                 1 -> {
+                    formacao.status = StatusFormacao.ANDAMENTO
+                    formacao.tipo = TipoFormacao.BACKEND
                     ConteudoServico.defineKotlin(usuario, formacao)
                 }
                 2 -> {
+                    formacao.status = StatusFormacao.ANDAMENTO
+                    formacao.tipo = TipoFormacao.FRONTEND
                     ConteudoServico.defineJS(usuario, formacao)
 
                 }
                 3 -> {
+                    formacao.tipo = TipoFormacao.OUTRA
                     interagePrimeiro()
                 }
                 else -> {

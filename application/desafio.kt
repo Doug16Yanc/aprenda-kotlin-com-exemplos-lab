@@ -14,6 +14,9 @@ fun main() {
     interagePrimeiro()
 }
 fun interagePrimeiro(){
+
+    val formacao = Formação("", 12, StatusFormacao.NÃO_INICIADA, TipoFormacao.OUTRA, Conteúdo(1, "", 1, NivelConteudo.FÁCIL, StatusConteudo.PENDENTE))
+
     Utilidade.imprimeMensagem("Bem-vindo(a) à Formação DIO\n\n")
     println(
         "Já é cadastrado aqui na plataforma?\n" +
@@ -23,13 +26,14 @@ fun interagePrimeiro(){
     )
     var opcao = Utilidade.sc.next()
     Utilidade.sc.nextLine()
+
+
     when (opcao.lowercase(Locale.getDefault())) {
         "s" -> {
 
-            UsuarioServico.realizaLogin()
+            UsuarioServico.realizaLogin(formacao)
         }
         "n" -> {
-            val formacao = Formação("", 12, StatusFormacao.NÃO_INICIADA, TipoFormacao.OUTRA, Conteúdo(1, "", 1, NivelConteudo.FÁCIL, StatusConteudo.PENDENTE))
             FormacaoServico.realizaMatricula(formacao)
         }
 
