@@ -3,20 +3,16 @@ import entities.Formação
 import services.FormacaoServico
 import services.UsuarioServico
 import utils.Utilidade
-import entities.Usuario
 import enumerations.NivelConteudo
 import enumerations.StatusConteudo
 import enumerations.StatusFormacao
-import enumerations.TipoFormacao
 import java.util.*
 
 fun main() {
     interagePrimeiro()
 }
 fun interagePrimeiro(){
-
-    val formacao = Formação("", 12, StatusFormacao.NÃO_INICIADA, TipoFormacao.OUTRA, Conteúdo(1, "", 1, NivelConteudo.FÁCIL, StatusConteudo.PENDENTE))
-
+    val formacao = Formação("", 12, StatusFormacao.NÃO_INICIADA, Conteúdo(1, "", 1, NivelConteudo.FÁCIL, StatusConteudo.PENDENTE))
     Utilidade.imprimeMensagem("Bem-vindo(a) à Formação DIO\n\n")
     println(
         "Já é cadastrado aqui na plataforma?\n" +
@@ -36,12 +32,10 @@ fun interagePrimeiro(){
         "n" -> {
             FormacaoServico.realizaMatricula(formacao)
         }
-
         "o" -> {
             Utilidade.imprimeMensagem("Foi um prazer tê-lo em nossa plataforma. Até logo.\n")
             System.exit(0)
         }
-
         else -> {
             Utilidade.imprimeMensagem("Opção não reconhecida.\n")
         }
