@@ -10,7 +10,6 @@ import utils.Utilidade
 class ConteudoServico {
     companion object {
         val conteudosKt: MutableList<Formação> = ArrayList()
-        val conteudosFinalizados: MutableList<Conteúdo> = ArrayList()
 
         init {
             conteudosKt.add(
@@ -98,7 +97,7 @@ class ConteudoServico {
 
                 val idEncontrado = conteudosKt.find { it.conteudo.id == id }
 
-                if (idEncontrado != null) {
+                if (idEncontrado != null && !usuario.conteudosFinalizados.contains(idEncontrado.conteudo)) {
                     if (idEncontrado.conteudo.status != StatusConteudo.CONCLUÍDO) {
                         Utilidade.imprimeMensagem(
                             "Conteúdo ${idEncontrado.conteudo.id},\n" +
@@ -106,7 +105,7 @@ class ConteudoServico {
                         )
                         idEncontrado.conteudo.status = StatusConteudo.CONCLUÍDO
                         aumentaNivel(usuario, idEncontrado.conteudo)
-                        conteudosFinalizados.add(idEncontrado.conteudo)
+                        usuario.conteudosFinalizados.add(idEncontrado.conteudo)
                     } else {
                         println("Você já concluiu esse conteúdo.")
                     }
@@ -129,10 +128,10 @@ class ConteudoServico {
 
             UsuarioServico.interageUsuario(usuario, formacao)
         }
-        fun listaConteudosFim() {
+        fun listaConteudosFim(usuario : Usuario) {
             Utilidade.imprimeMensagem("Conteúdos finalizados. Mais um passo importante na carreira.\n")
-            if (conteudosFinalizados.isNotEmpty()) {
-                for (conteudos in conteudosFinalizados) {
+            if (usuario.conteudosFinalizados.isNotEmpty()) {
+                for (conteudos in usuario.conteudosFinalizados) {
                     Utilidade.imprimeMensagem(
                         "" +
                                 "                   > Código do conteúdo : ${conteudos.id}\n" +

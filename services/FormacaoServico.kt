@@ -46,7 +46,7 @@ class FormacaoServico {
             println("Senha para o seu login:")
             var senha = Utilidade.sc.nextLine()
 
-            val usuario = Usuario(id, nome, email, login, senha, NivelUsuario.BRONZE)
+            val usuario = Usuario(id, nome, email, login, senha, NivelUsuario.BRONZE, formacao)
 
             inscritos.add(usuario)
 

@@ -23,7 +23,7 @@ class UsuarioServico {
                 println("Senha de acesso:")
                 var senha = Utilidade.sc.nextLine()
 
-                val usuarioInscrito = FormacaoServico.inscritos.find {it.login == login && it.senha == senha}
+                val usuarioInscrito = FormacaoServico.inscritos.find {it.login == login && it.senha == senha && it.id == id}
 
                 if(usuarioInscrito != null){
                     interageUsuario(usuarioInscrito, formacao)
@@ -59,7 +59,7 @@ class UsuarioServico {
                         ConteudoServico.defineKotlin(usuario, formacao)
                     }
                     3 -> {
-                        ConteudoServico.listaConteudosFim()
+                        ConteudoServico.listaConteudosFim(usuario)
                     }
                     4 -> {
                         CustoServico.mostraCustos(usuario, formacao)

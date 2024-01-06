@@ -8,5 +8,7 @@ data class Usuario(
     var email : String,
     var login : String,
     var senha : String,
-    var nivel : NivelUsuario
+    var nivel : NivelUsuario,
+    var formacao : Formação,
+    val conteudosFinalizados: MutableList<Conteúdo> = mutableListOf()
 )
