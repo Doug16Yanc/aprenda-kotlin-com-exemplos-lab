@@ -9,60 +9,13 @@ import utils.Utilidade
 
 class ConteudoServico {
     companion object {
-        val conteudosKt: MutableList<Formação> = ArrayList()
-
-        init {
-            conteudosKt.add(
-                Formação(
-                    "Desenvolvimento Kotlin",
-                    12,
-                    StatusFormacao.NÃO_INICIADA,
-                    Conteúdo(
-                        17364,
-                        "Linguagem de programação Kotlin e suas funcionalidades",
-                        3,
-                        NivelConteudo.FÁCIL,
-                        StatusConteudo.PENDENTE
-                    )
-                )
-            )
-            conteudosKt.add(
-                Formação(
-                    "Desenvolvimento Kotlin",
-                    12,
-                    StatusFormacao.NÃO_INICIADA,
-                    Conteúdo(
-                        18934,
-                        "Padrões de projeto em Kotlin",
-                        4,
-                        NivelConteudo.INTERMEDIÁRIO,
-                        StatusConteudo.PENDENTE
-                    )
-                )
-            )
-            conteudosKt.add(
-                Formação(
-                    "Desenvolvimento Kotlin",
-                    12,
-                    StatusFormacao.NÃO_INICIADA,
-                    Conteúdo(
-                        19756,
-                        "Desenvolvimento backend com Spring Boot em Kotlin",
-                        5,
-                        NivelConteudo.AVANÇADO,
-                        StatusConteudo.PENDENTE
-                    )
-                )
-            )
-        }
-
 
         fun defineKotlin(usuario: Usuario, formacao: Formação) {
             formacao.status = StatusFormacao.ANDAMENTO
             Utilidade.imprimeMensagem("Definição de andamento da formação:")
             println("O que você tem a aprender:\n")
             Utilidade.imprimeMensagem("Desenvolvimento backend com Kotlin e Spring Boot.\n")
-            for (conteudos in conteudosKt) {
+            for (conteudos in usuario.conteudosKt) {
                 Utilidade.imprimeMensagem(
                     "" +
                             "                   > Código do conteúdo : ${conteudos.conteudo.id}\n" +
@@ -75,7 +28,7 @@ class ConteudoServico {
         }
 
         fun fazConteudosKt(usuario: Usuario, formacao: Formação) {
-            if (validaConclusaoTotal(formacao)) {
+            if (validaConclusaoTotal(usuario)) {
                 Utilidade.imprimeMensagem(
                     "Você concluiu toda a formação de Desenvolvimento backend com\n" +
                             "Kotlin e Spring Boot.\n"
@@ -95,9 +48,9 @@ class ConteudoServico {
                     break
                 }
 
-                val idEncontrado = conteudosKt.find { it.conteudo.id == id }
+                val idEncontrado = usuario.conteudosKt.find { it.conteudo.id == id }
 
-                if (idEncontrado != null && !usuario.conteudosFinalizados.contains(idEncontrado.conteudo)) {
+                if (idEncontrado != null) {
                     if (idEncontrado.conteudo.status != StatusConteudo.CONCLUÍDO) {
                         Utilidade.imprimeMensagem(
                             "Conteúdo ${idEncontrado.conteudo.id},\n" +
@@ -114,7 +67,7 @@ class ConteudoServico {
                     Utilidade.imprimeMensagem("Id de conteúdo não reconhecido.\n")
                 }
 
-                if (validaConclusaoTotal(formacao)) {
+                if (validaConclusaoTotal(usuario)) {
                     Utilidade.imprimeMensagem(
                         "Você concluiu toda a formação de Desenvolvimento backend com\n" +
                                 "Kotlin e Spring Boot.\n"
@@ -144,9 +97,8 @@ class ConteudoServico {
                 println("Você ainda não concluiu nenhum conteúdo.\n")
             }
         }
-
-        fun validaConclusaoTotal(formacao: Formação) : Boolean {
-            return conteudosKt.all { it.conteudo.status == StatusConteudo.CONCLUÍDO }
+        fun validaConclusaoTotal(usuario : Usuario) : Boolean {
+            return usuario.conteudosKt.all { it.conteudo.status == StatusConteudo.CONCLUÍDO }
         }
 
         fun aumentaNivel(usuario: Usuario, conteudo: Conteúdo) {

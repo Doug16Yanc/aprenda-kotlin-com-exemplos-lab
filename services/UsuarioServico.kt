@@ -39,6 +39,7 @@ class UsuarioServico {
             }
         }
         fun interageUsuario(usuario: Usuario, formacao : Formação){
+            var saiu = false
             do {
                 Utilidade.imprimeMensagem("Bem-vindo(a) caríssimo(a) ${usuario.nome}\n")
                 println(
@@ -67,6 +68,8 @@ class UsuarioServico {
 
                     5 -> {
                         interagePrimeiro()
+                        saiu = true
+                        break
                     }
 
                     else -> {
